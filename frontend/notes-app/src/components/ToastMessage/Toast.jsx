@@ -13,7 +13,7 @@ const Toast = ({ isShown, message, type, onClose, showToastM }) => {
   }, [onClose]);
 
   return (
-    <div className={`absolute top-20 right-6 transition-all duration-400 ${isShown ? 'opacity-100' : 'opacity-0'}`}>
+    <div className={`absolute top-20 right-6 transition-all duration-400 ${isShown ? 'flex' : 'hidden'}`}>
       <div className={`min-w-52 bg-white border shadow-2xl rounded-md relative
             ${type === 'delete' ? 'after:bg-red-500' : 'after:bg-green-500'} after:w-[5px] after:h-full
             after:absolute after:top-0 after:left-0 after:rounded-l-lg`}>

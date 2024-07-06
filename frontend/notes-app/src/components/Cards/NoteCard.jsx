@@ -19,7 +19,7 @@ const NoteCard = ({
   const formattedDate = moment(date, 'Do MMMM YYYY', true);
 
   return (
-    <div className='border rounded-2xl p-4 bg-white hover:shadow-xl transition-all ease-in-out'>
+    <div className={` rounded-2xl p-4 ${ isPinned ? "bg-white border-[1.5px] border-black " : "bg-slate-200 border"} hover:shadow-xl transition-all ease-in-out`}>
       <div className="flex items-center justify-between">
         <div className="flex flex-col">
             <h6 className="text-sm font-medium">{title}</h6>

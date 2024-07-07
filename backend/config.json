@@ -1,4 +1,4 @@
 {
-    "connectionString": "mongodb+srv://vk_tori:vk07062003@mongovinit.v3qyxxh.mongodb.net/?retryWrites=true&w=majority&appName=MongoVinit"
+    "connectionString": "mongodb+srv://vk_tori:vk07062003@mongovinit.v3qyxxh.mongodb.net/test?retryWrites=true&w=majority&appName=MongoVinit"
     
 }

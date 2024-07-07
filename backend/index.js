@@ -1,35 +1,26 @@
 require('dotenv').config();
-
-const config = require('./config.json');
 const mongoose = require('mongoose');
-
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const express = require('express');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const { authenticateToken } = require('./utilities');
 const User = require('./models/user.model');
 const Note = require('./models/note.model');
 
-const express = require('express');
-const cors = require('cors');
+const port = process.env.PORT || 8000;
+const mongoURI = process.env.MONGODB_URI;
 
 const app = express();
-
-
-
-const jwt = require('jsonwebtoken');
-const { authenticateToken } = require('./utilities');
-const { error } = require('console');
-
 app.use(express.json());
+app.use(cors({ origin: '*' }));
 
-app.use(
-  cors({
-    origin: '*',
-  })
-);
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+
 
 app.get('/', (req, res) => {
   res.json({ data: 'Hello World' });
@@ -333,8 +324,8 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
 
 /////////////////////////////////////////////
 
-app.listen(8000, () => {
-  console.log('Server is running on port 8000');
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 module.exports = app;

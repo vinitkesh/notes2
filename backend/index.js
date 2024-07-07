@@ -3,7 +3,7 @@ require('dotenv').config();
 const config = require('./config.json');
 const mongoose = require('mongoose');
 
-mongoose.connect(config.connectionString);
+mongoose.connect(process.env.MONGODB_URI);
 
 const User = require('./models/user.model');
 const Note = require('./models/note.model');
@@ -329,8 +329,9 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
 
 /////////////////////////////////////////////
 
-app.listen(8000, () => {
-  console.log('Server is running on port 8000');
-});
+app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running');
+}
+);
 
 module.exports = app;

@@ -1,25 +1,31 @@
 require('dotenv').config();
+
+const config = require('./config.json');
 const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const { authenticateToken } = require('./utilities');
+
+mongoose.connect(config.connectionString);
+
 const User = require('./models/user.model');
 const Note = require('./models/note.model');
 
-const port = process.env.PORT || 8000;
-const mongoURI = process.env.MONGODB_URI;
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
+
+
+
+const jwt = require('jsonwebtoken');
+const { authenticateToken } = require('./utilities');
+const { error } = require('console');
+
 app.use(express.json());
-app.use(cors({ origin: '*' }));
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 app.get('/', (req, res) => {
   res.json({ data: 'Hello World' });
@@ -323,8 +329,8 @@ app.get("/search-notes/", authenticateToken, async (req, res) => {
 
 /////////////////////////////////////////////
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(8000, () => {
+  console.log('Server is running on port 8000');
 });
 
 module.exports = app;
